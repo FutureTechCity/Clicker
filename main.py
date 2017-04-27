@@ -4,8 +4,11 @@ from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.vector import Vector
 from kivy.properties import NumericProperty
+from kivy.core.audio import SoundLoader
 
 class CookieButton(ButtonBehavior, Image):
+    sound = SoundLoader.load('crunch.wav')
+
     def __init__(self, **kwargs):
         super(CookieButton, self).__init__(**kwargs)
         self.source = 'cookie.png'
@@ -16,6 +19,7 @@ class CookieButton(ButtonBehavior, Image):
         self.parent.score += 1
         self.size = self.clicked_size
         self.center = self.parent.center
+        self.sound.play()
 
     def on_release(self):
         self.size = self.original_size
